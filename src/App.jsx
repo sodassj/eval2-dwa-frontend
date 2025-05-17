@@ -8,6 +8,8 @@ import Navbar from "./components/Navbar"
 import { AuthProvider } from "./context/AuthContext"
 import ProtectedRoute from "./components/ProtectedRoute"
 import AdminRoute from "./components/AdminRoute"
+import ModeradorRoute from "./components/ModeradorRoute"
+import RevisarMedicamentosPage from "./pages/RevisarMedicamentosPage"
 
 function App() {
   return (
@@ -42,6 +44,17 @@ function App() {
                 </AdminRoute>
               }
             />
+            <Route
+              path="/revisar-medicamentos"
+              element={
+                <ModeradorRoute>
+                  <RevisarMedicamentosPage />
+                </ModeradorRoute>
+              }
+            />
+
+
+
             <Route path="/" element={<Navigate to="/login" replace />} />
           </Routes>
         </main>

@@ -114,7 +114,7 @@
 
 /* Iconos por enlace */
 .navLinks li:nth-child(1) a::before {
-  content: "📊";
+  content: "🏠";
 }
 
 .navLinks li:nth-child(2) a::before {
@@ -123,6 +123,18 @@
 
 .navLinks li:nth-child(3) a::before {
   content: "👥";
+}
+
+.navLinks li:nth-child(6) a::before {
+  content: "🔍"; /* Reportes */
+}
+
+.navLinks li:nth-child(5) a::before {
+  content: "⚙️"; /* Configuración */
+}
+
+.navLinks li:nth-child(4) a::before {
+  content: "📊"; /* Reportes */
 }
 
 .logoutBtn::before {
@@ -137,6 +149,7 @@
 .navbar:has(+ div .login) .navLinks li:nth-child(2) a::before {
   content: "📝";
 }
+
 
 /* Responsive */
 @media (max-width: 768px) {

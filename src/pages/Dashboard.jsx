@@ -6,7 +6,7 @@ import { AuthContext } from "../context/AuthContext"
 import styles from "./Dashboard.module.css"
 
 const Dashboard = () => {
-  const { currentUser, isAdmin } = useContext(AuthContext)
+  const { currentUser, isAdmin, isModerador } = useContext(AuthContext)
 
   return (
     <div className={styles.dashboardContainer}>
@@ -24,6 +24,26 @@ const Dashboard = () => {
           </Link>
         </div>
 
+        {(isModerador() || isAdmin()) && (
+          <div className={styles.menuCard}>
+            <h3>Revisión MD</h3>
+            <p>Aprueba o rechaza medicamentos ingresados</p>
+            <Link to="/revisar-medicamentos" className={styles.menuButton}>
+              Revisar Medicamentos
+            </Link>
+          </div>
+        )}
+
+        {isModerador() && (
+              <div className={styles.menuCard}>
+                <h3>Historial</h3>
+                <p>Consulta el historial de medicamentos revisados</p>
+                <Link to="/historial-revisiones" className={styles.menuButton}>
+                  Ver Historial
+                </Link>
+              </div>
+            )}
+
         {isAdmin() && (
           <>
           <div className={styles.menuCard}>
@@ -40,6 +60,21 @@ const Dashboard = () => {
               <p>Consulta reportes generales del sistema</p>
               <Link to="/reportes" className={styles.menuButton}>
                 Ver Reportes
+              </Link>
+            </div>
+            {/* Nuevos menucards para admin */}
+            <div className={styles.menuCard}>
+              <h3>Configuración</h3>
+              <p>Gestiona la configuración del sistema de Farmacia</p>
+              <Link to="/configuracion" className={styles.menuButton}>
+                Ir a Configuración
+              </Link>
+            </div>
+            <div className={styles.menuCard}>
+              <h3>Auditorías</h3>
+              <p>Revisa el historial de acciones del sistema</p>
+              <Link to="/auditorias" className={styles.menuButton}>
+                Ver Auditorías
               </Link>
             </div>
           </>

@@ -4,9 +4,9 @@ import { AuthContext } from "../context/AuthContext";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
-  const { currentUser, logout, isAdmin } = useContext(AuthContext);
+  const { currentUser, logout, isAdmin, isModerador } = useContext(AuthContext);
   const navigate = useNavigate();
-  const API_URL = import.meta.env.VITE_API_URL; // Accede a la variable de entorno
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const handleLogout = async () => {
     try {
@@ -16,13 +16,9 @@ const Navbar = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-
-      // Independientemente de la respuesta, hacemos logout local
-      logout();
-      navigate("/login");
     } catch (error) {
       console.error("Error al cerrar sesión:", error);
-      // Aún así, hacemos logout local
+    } finally {
       logout();
       navigate("/login");
     }
@@ -54,11 +50,35 @@ const Navbar = () => {
         <li>
           <Link to="/medicamentos">Medicamentos</Link>
         </li>
-        {isAdmin() && (
-          <li>
-            <Link to="/usuarios">Usuarios</Link>
-          </li>
+
+        {isModerador() && (
+          <>
+            <li>
+              <Link to="/revisar-medicamentos">Revisar Medicamentos</Link>
+            </li>
+            <li>
+              <Link to="/historial-revisiones">Historial Revisiones</Link>
+            </li>
+          </>
         )}
+
+        {isAdmin() && (
+          <>
+            <li>
+              <Link to="/usuarios">Usuarios</Link>
+            </li>
+            <li>
+              <Link to="/reportes">Reportes</Link>
+            </li>
+            <li>
+              <Link to="/configuracion">Configuración</Link>
+            </li>
+            <li>
+              <Link to="/auditorias">Auditorías</Link>
+            </li>
+          </>
+        )}
+
         <li>
           <button className={styles.logoutBtn} onClick={handleLogout}>
             Cerrar Sesión
