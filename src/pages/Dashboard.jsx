@@ -25,13 +25,24 @@ const Dashboard = () => {
         </div>
 
         {isAdmin() && (
+          <>
           <div className={styles.menuCard}>
             <h3>Usuarios</h3>
-            <p>Administra los usuarios del sistema</p>
+            <p>Administra los usuarios del sistema de Farmacia</p>
             <Link to="/usuarios" className={styles.menuButton}>
               Gestionar Usuarios
             </Link>
           </div>
+
+          {/* Tarjeta adicional para rellenar el diseño */}
+            <div className={styles.menuCard}>
+              <h3>Reportes</h3>
+              <p>Consulta reportes generales del sistema</p>
+              <Link to="/reportes" className={styles.menuButton}>
+                Ver Reportes
+              </Link>
+            </div>
+          </>
         )}
       </div>
     </div>
