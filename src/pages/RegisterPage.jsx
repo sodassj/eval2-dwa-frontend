@@ -10,6 +10,7 @@ const RegisterPage = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    rol: "",
   });
   const [errors, setErrors] = useState({});
   const [apiError, setApiError] = useState("");
@@ -160,6 +161,25 @@ const RegisterPage = () => {
             {errors.confirmPassword && (
               <span className={styles.errorText}>{errors.confirmPassword}</span>
             )}
+          </div>
+
+          <div className={styles.formGroup}>
+          <label htmlFor="rol">Rol</label>
+          <select
+          id="rol"
+          name="rol"
+          value={formData.rol}
+          onChange={handleChange}
+          className={errors.rol ? styles.inputError : ""}
+          >
+          <option value="">Selecciona un rol</option>
+          <option value="usuario">Usuario</option>
+          <option value="moderador">Moderador</option>
+          <option value="admin">Administrador</option>
+          </select>
+          {errors.rol && (
+          <span className={styles.errorText}>{errors.rol}</span>
+          )}
           </div>
 
           <button type="submit" className={styles.submitButton}>
